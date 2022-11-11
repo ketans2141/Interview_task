@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="main_container">
+      <header class="header">
+        <h1>Ketan's Directory App</h1>
+      </header>
+      <div class="inner_container">
+        <div class="btn_container">
+          <button class="btn add_new_person_btn">Add New Person</button>
+          <button class="btn retrieve_info_btn">Retrieve Information</button>
+        </div>
+        <div class="add_new_person_box">
+          <span class="add_new_person_text">Add New Person</span>
+          <div class="table_container">
+            <table id="table">
+              <thead>
+                <th>Name</th>
+                <th>Date of birth</th>
+                <th>Aadhar Number</th>
+                <th>Mobile Number</th>
+                <th>Age</th>
+                <th>Actions</th>
+              </thead>
+              <tbody class="tableBody">
+                <tr>
+                  <td><input type="text" id="fname" /></td>
+                  <td><input type="date" id="dob" class="birth" /></td>
+                  <td><input type="number" id="adhar_num" /></td>
+                  <td><input type="number" id="mob_num" /></td>
+                  <td id="age"></td>
+                  <td id="save_del_btn">
+                    <button class="save_btn"><u> Save</u></button>
+                    <button class="delete_row"><u>Delete</u></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="add_btn_container">
+            <button class="btn add_btn">Add</button>
+          </div>
+        </div>
+        <div class="retrieve_info_box">
+          <span class="retrieve_info_text">Retrieve Information</span>
+          <div class="retrieve_data_block">
+            <form action="" class="form">
+              <input type="text" class="aadhar_num_input" />
+              <button class="find_btn">Find</button>
+            </form>
+            <div>
+              <div class="display_message"></div>
+              <h1 class="no_match_found"></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
