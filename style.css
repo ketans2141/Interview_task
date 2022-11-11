@@ -87,7 +87,7 @@ td{
     width: 200px;
 }
 
-.save_btn,.delete_row{
+.save_btn,.delete_row,.btns{
     font-size: 18px;
     padding: 3px;
     outline: none;

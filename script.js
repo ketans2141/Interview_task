@@ -1,5 +1,6 @@
 const table = document.getElementById("table");
 const tableBody = document.querySelector(".tableBody");
+const tableInnerBody = document.querySelector(".tableInnerBody");
 const add_btn = document.querySelector(".add_btn");
 const nameInput = document.querySelector("#fname");
 const dobInput = document.querySelector("#dob");
@@ -16,42 +17,33 @@ const saveBtn = document.querySelector(".save_btn");
 
 add_btn.addEventListener("click", addRow);
 
+let userArray = [];
+let myAge;
+
 function addRow() {
   let name = nameInput.value;
   let dob = dobInput.value;
   let adhar_num = adhar_numInput.value;
   let mob_num = mob_numInput.value;
-  let age = ageInput.value;
-  // let save_del=save_del_btn.value;
 
-//   -----validations---------
+  nameInput.value = "";
+  dobInput.value = "";
+  adhar_numInput.value = "";
+  mob_numInput.value = "";
 
-  if (name==null || name==""){
-      alert("Name can't be blank");
-      return false;
-    }else if(adhar_num.length<12 || adhar_num.length>12){
-      alert("Adhar number should be 12 digits");
-      return false;
-      }
-      else if(mob_num.length > 10 || mob_num.length<10) {
-          alert("Please enter correct mobile number");
-          return false;
-      }
+  //   -----validations---------
 
-  let rowBlock = `
-    <tr>
-        <td>${name}</td>
-        <td>${dob}</td>
-        <td>${adhar_num}</td>
-        <td>${mob_num}</td>
-        <td class="ageVal" >${age}</td>
-        <td id="save_del_btn">
-            <button class="save_btn"><u>Save</u></button>
-            <button class="delete_row"><u class="delete_row">Delete</u></button>
-        </td>
-    </tr>
-    `;
-  table.innerHTML += rowBlock;
+  //   if (name==null || name==""){
+  //       alert("Name can't be blank");
+  //       return false;
+  //     }else if(adhar_num.length<12 || adhar_num.length>12){
+  //       alert("Adhar number should be 12 digits");
+  //       return false;
+  //       }
+  //       else if(mob_num.length > 10 || mob_num.length<10) {
+  //           alert("Please enter correct mobile number");
+  //           return false;
+  //       }
 
   // ----------------------calculating age-------------------------
 
@@ -64,44 +56,49 @@ function addRow() {
   let days = hours * 24;
   let years = days * 365;
 
-  let myAge = Math.round(milliSeconds / years);
+  myAge = Math.round(milliSeconds / years);
 
-  document.querySelector(".ageVal").innerHTML = myAge;
+  let rowBlock = `
+    <tr>
+        <td>${name}</td>
+        <td>${dob}</td>
+        <td>${adhar_num}</td>
+        <td>${mob_num}</td>
+        <td class="ageVal" >${myAge}</td>
+        <td id="save_del_btn">
+            <button class="save_btn"><u class="save_btn">Save</u></button>
+            <button class="delete_row"><u class="delete_row">Delete</u></button>
+        </td>
+        </tr>
+    `;
+  tableInnerBody.innerHTML += rowBlock;
 
-  // ---------------setting data in local storage -----------------
-
-  let user = [
-    {
-      Name: name,
-      DateOfBirth: dob,
-      AadharNumber: adhar_num,
-      MobileNumber: mob_num,
-      Age: myAge,
-    },
-  ];
-//   localStorage.setItem("user", JSON.stringify(user));
-
-//   saveBtn.addEventListener("click", function () {
-//     localStorage.setItem("user", JSON.stringify(user));
-//   });
-
-  table.addEventListener("click",function(e){
-      if(e.target.classList.contains("save_btn")){
-         localStorage.setItem("user",JSON.stringify(user))
-      }
-  })
-
-  // -----------------------deleting row------------------------
-
-  table.addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete_row")) {
-      localStorage.clear();
-      e.target.closest("tr").remove();
-    }
-  });
+  let user = {
+    "Name": name,
+    "DateOfBirth": dob,
+    "AadharNumber": adhar_num,
+    "MobileNumber": mob_num,
+    "Age": myAge,
+  };
+  userArray.push(user);
 }
+// -----------------------deleting row------------------------
 
-// -----------------------------------------------------------
+table.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete_row")) {
+    // localStorage.clear();
+    e.target.closest("tr").remove();
+  }
+});
+
+// ---------------setting data in local storage -----------------
+
+table.addEventListener("click", function (e) {
+  if (e.target.classList.contains("save_btn")) {
+    localStorage.setItem("user", JSON.stringify(userArray));
+    console.log("hi");
+  }
+});
 
 // tabs
 
@@ -122,34 +119,39 @@ const findBtn = document.querySelector(".find_btn");
 const displayMessage = document.querySelector(".display_message");
 const noData = document.querySelector(".no_match_found");
 
-let getUser = JSON.parse(localStorage.getItem("user"));
-console.log(getUser[0]["AadharNumber"]);
-
-function findObjVal() {
-  let key, val;
-  for (let i = 0; i < getUser.length; i++) {
-    for (key in getUser[i]) {
-      console.log(key + ":" + getUser[i][key]);
-    }
-  }
-}
-findObjVal();
+let userData = JSON.parse(localStorage.getItem("user"));
+console.log(userData);
+// let key;
+// for(let i=0;i<userData.length;i++){
+//     for( key in userData[i]){
+//         console.log(key+":"+userData[i][key])
+//     }
+// }
 
 findBtn.addEventListener("click", function (e) {
   let aadharValue = aadharInput.value;
   console.log(aadharValue);
   e.preventDefault();
-  if (aadharValue == getUser[0]["AadharNumber"]) {
-    displayMessage.innerHTML = `
+
+  for (let i = 0; i < userData.length; i++) {
+    if (aadharValue !== userData[i]["AadharNumber"]) {
+      noData.innerHTML = `<h1>No Match Found</h1>`;
+      displayMessage.innerHTML = "";
+    }
+  }
+
+  for (let i = 0; i < userData.length; i++) {
+    if (aadharValue == userData[i]["AadharNumber"]) {
+      displayMessage.innerHTML = `
         <div class="retrieve_info_display">
-            <p>Name: ${getUser[0]["Name"]}</p>
-            <p>DOB: ${getUser[0]["DateOfBirth"]}</p>
-            <p>Aadhar: ${getUser[0]["AadharNumber"]}</p>
-            <p>Mobile No: ${getUser[0]["MobileNumber"]}</p>
-            <p>Age: ${getUser[0]["Age"]}</p>
+            <p>Name: ${userData[i]["Name"]}</p>
+            <p>DOB: ${userData[i]["DateOfBirth"]}</p>
+            <p>Aadhar: ${userData[i]["AadharNumber"]}</p>
+            <p>Mobile No: ${userData[i]["MobileNumber"]}</p>
+            <p>Age: ${userData[i]["Age"]}</p>
         </div>
             `;
-  } else {
-    noData.innerHTML = "No Match Found";
+      noData.innerHTML = "";
+    }
   }
 });
