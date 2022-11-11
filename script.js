@@ -67,7 +67,7 @@ function addRow() {
         <td class="ageVal" >${myAge}</td>
         <td id="save_del_btn">
             <button class="save_btn"><u class="save_btn">Save</u></button>
-            <button class="delete_row"><u class="delete_row">Delete</u></button>
+            <button class="delete_row" id="${adhar_num}">Delete</button>
         </td>
         </tr>
     `;
@@ -88,6 +88,13 @@ table.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete_row")) {
     // localStorage.clear();
     e.target.closest("tr").remove();
+    let storedData=JSON.parse(localStorage.getItem("user"));
+    console.log(storedData);
+   let filterData= storedData.filter((item)=>{
+        return e.target.id != item.AadharNumber;
+    })
+    localStorage.setItem("user",JSON.stringify(filterData));
+    console.log(filterData);
   }
 });
 
@@ -119,19 +126,20 @@ const findBtn = document.querySelector(".find_btn");
 const displayMessage = document.querySelector(".display_message");
 const noData = document.querySelector(".no_match_found");
 
-let userData = JSON.parse(localStorage.getItem("user"));
-console.log(userData);
-// let key;
-// for(let i=0;i<userData.length;i++){
-//     for( key in userData[i]){
-//         console.log(key+":"+userData[i][key])
-//     }
-// }
-
 findBtn.addEventListener("click", function (e) {
   let aadharValue = aadharInput.value;
+  aadharInput.value=""
   console.log(aadharValue);
   e.preventDefault();
+
+  let userData = JSON.parse(localStorage.getItem("user"));
+console.log(userData);
+let key;
+for(let i=0;i<userData.length;i++){
+    for( key in userData[i]){
+        console.log(key+":"+userData[i][key])
+    }
+}
 
   for (let i = 0; i < userData.length; i++) {
     if (aadharValue !== userData[i]["AadharNumber"]) {
