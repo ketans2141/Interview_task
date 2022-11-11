@@ -24,17 +24,19 @@ function addRow() {
   let age = ageInput.value;
   // let save_del=save_del_btn.value;
 
-  // if (name==null || name==""){
-  //     alert("Name can't be blank");
-  //     return false;
-  //   }else if(adhar_num.length<12 || adhar_num.length>12){
-  //     alert("Adhar number should be 12 digits");
-  //     return false;
-  //     }
-  //     else if(mob_num.length > 10 || mob_num.length<10) {
-  //         alert("Please enter correct mobile number");
-  //         return false;
-  //     }
+//   -----validations---------
+
+  if (name==null || name==""){
+      alert("Name can't be blank");
+      return false;
+    }else if(adhar_num.length<12 || adhar_num.length>12){
+      alert("Adhar number should be 12 digits");
+      return false;
+      }
+      else if(mob_num.length > 10 || mob_num.length<10) {
+          alert("Please enter correct mobile number");
+          return false;
+      }
 
   let rowBlock = `
     <tr>
@@ -77,17 +79,17 @@ function addRow() {
       Age: myAge,
     },
   ];
-  localStorage.setItem("user", JSON.stringify(user));
+//   localStorage.setItem("user", JSON.stringify(user));
 
-  saveBtn.addEventListener("click", function () {
-    localStorage.setItem("user", JSON.stringify(user));
-  });
+//   saveBtn.addEventListener("click", function () {
+//     localStorage.setItem("user", JSON.stringify(user));
+//   });
 
-  // table.addEventListener("click",function(e){
-  //     if(e.target.classList.contains("save_btn")){
-  //        localStorage.setItem("user",JSON.stringify(user))
-  //     }
-  // })
+  table.addEventListener("click",function(e){
+      if(e.target.classList.contains("save_btn")){
+         localStorage.setItem("user",JSON.stringify(user))
+      }
+  })
 
   // -----------------------deleting row------------------------
 
