@@ -33,17 +33,17 @@ function addRow() {
 
   //   -----validations---------
 
-  //   if (name==null || name==""){
-  //       alert("Name can't be blank");
-  //       return false;
-  //     }else if(adhar_num.length<12 || adhar_num.length>12){
-  //       alert("Adhar number should be 12 digits");
-  //       return false;
-  //       }
-  //       else if(mob_num.length > 10 || mob_num.length<10) {
-  //           alert("Please enter correct mobile number");
-  //           return false;
-  //       }
+    if (name==null || name==""){
+        document.querySelector(".errorMessage").innerHTML="Name cant be blank"
+        return false;
+      }else if(adhar_num.length<12 || adhar_num.length>12){
+        document.querySelector(".errorMessage").innerHTML="Adhar number should be 12 digits"
+        return false;
+        }
+        else if(mob_num.length > 10 || mob_num.length<10) {
+            document.querySelector(".errorMessage").innerHTML="Please enter correct mobile number"
+            return false;
+        }
 
   // ----------------------calculating age-------------------------
 

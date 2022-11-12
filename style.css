@@ -59,6 +59,13 @@
     margin: 0 auto;
 }
 
+.errorMessage{
+    color: red;
+    text-align: center;
+    margin: 30px 10px;
+    font-size: 18px;
+}
+
 table{
     border-collapse: collapse;
     margin-top: 30px;
