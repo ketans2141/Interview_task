@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Ketan's Directory App</h1>
+    </header>
+    <main class="mainContainer">
+        <div class="btnContainer">
+            <button class="btn addNewpersonBtn">Add New Person</button>
+            <button class="btn retrieveInfoBtn">Retrieve information</button>
+        </div>
+        <div  class="addNewPersonBlock">
+            <span class="addNewPersonText">Add New Person</span>
+            <p class="errorMessage"></p>
+            <table class="myTable">
+                <thead>
+                    <th>Name</th>
+                    <th>Date of birth</th>
+                    <th>Aadhar Number</th>
+                    <th>Mobile Number</th>
+                    <th>Age</th>
+                    <th>Actions</th>
+                </thead>
+                    <tbody class="tableBody"></tbody>
+                    <tr>
+                        <td><input type="text" class="nameInput"></td>
+                        <td><input type="date" class="dateInput"></td>
+                        <td><input type="number" class="aadharInput"></td>
+                        <td><input type="number" class="mobInput"></td>
+                        <td class="ageBox"></td>
+                        <td>
+                            <!-- <button class="saveBtn">Save</button>
+                            <button class="delBtn">Delete</button> -->
+                        </td>
+                    </tr>
+                
+            </table>
+            <div class="addBtnContainer">
+                <button class="btn addRowBtn">Add Row</button>
+            </div>
+        </div>
+    </main>
+
+    <div  class="retrieveInfoBlock">
+        <span class="retrieveInfoText">Retrieve Information</span>
+        <div class="inputBtnContainer">
+            <input type="text" class="aadharInputField">
+            <button class="btn findBtn">Find</button>
+        </div>
+        <div>
+            <div class="displayDetails"></div>
+            <h1 class="noMatchFoundText"></h1>
+        </div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>

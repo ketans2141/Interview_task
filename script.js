@@ -26,6 +26,8 @@ function addRow() {
   let adhar_num = adhar_numInput.value;
   let mob_num = mob_numInput.value;
 
+  console.log(name,dob,adhar_num,mob_num);
+
   nameInput.value = "";
   dobInput.value = "";
   adhar_numInput.value = "";
@@ -71,7 +73,8 @@ function addRow() {
         </td>
         </tr>
     `;
-  tableInnerBody.innerHTML += rowBlock;
+    tableInnerBody.innerHTML+=rowBlock;
+  // tableBody.appendChild(rowBlock);
 
   let user = {
     "Name": name,
@@ -81,6 +84,7 @@ function addRow() {
     "Age": myAge,
   };
   userArray.push(user);
+  console.log(userArray)
 }
 // -----------------------deleting row------------------------
 
