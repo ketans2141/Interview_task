@@ -74,6 +74,11 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+/* 
+.displayWeatherDetails{
+    height: 400px;
+    border: 1px solid black;
+} */
 
 .displayWeatherData{
     border: 2px solid #4472C4;
@@ -105,4 +110,10 @@
 
 .changeColor{
     border: 5px solid green;
+    border-radius: 10px;
+    /* padding: 10px; */
+    height: 250px;
+    width: 400px;
+    font-size: 18px;
+    position:relative;
 }
